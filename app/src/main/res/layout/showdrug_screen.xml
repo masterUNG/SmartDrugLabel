@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BCC6CC"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#17AF95"
+        android:src="@drawable/header" />
+
+    <SearchView
+        android:id="@+id/inputSearch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/banner"
+        android:queryHint="Search..."/>
+
+    <ListView
+        android:id="@+id/lv_medname"
+        android:layout_width="fill_parent"
+        android:layout_height="380dp"
+        android:layout_below="@+id/inputSearch"
+        android:choiceMode="singleChoice"
+        android:orientation="horizontal" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lv_medname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/register_button"
+        android:text="SUBMIT"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+</RelativeLayout>
