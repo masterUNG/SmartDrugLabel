@@ -30,7 +30,8 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/registration_background"
-        android:padding="40dp">
+        android:padding="40dp"
+        android:layout_above="@+id/button">
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -70,5 +71,13 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <Button
+        android:text="Stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="clickStopReadTag"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
