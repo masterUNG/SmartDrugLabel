@@ -18,6 +18,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,11 @@ public class ReadTagActivity extends AppCompatActivity {
      */
     private GoogleApiClient client2;
 
+    private MediaPlayer mediaPlayer;
+
+    private boolean aBoolean = true;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +91,15 @@ public class ReadTagActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+    }   // Main Class
+
+    public void clickStopReadTag(View view) {
+        aBoolean = true;
+        mediaPlayer.stop();
     }
+
+
 
     private void NFCIntent(Intent intent) {
         String action = intent.getAction();
@@ -264,6 +278,7 @@ public class ReadTagActivity extends AppCompatActivity {
                 params.add(new BasicNameValuePair("strID", result));
 
                 String resultServer = getHttpPost(url, params);
+                Log.d("31janV1", "resultServer ==> " + resultServer);
 
                 /*** Default Value ***/
                 String strStatusID = "0";
@@ -292,13 +307,26 @@ public class ReadTagActivity extends AppCompatActivity {
                 } else {
                     String urlAudio = "http://202.58.126.48/uploaded/" + strAudioName;
                     mTextView.setText(strAudioName);
-                    MediaPlayer mediaPlayer = new MediaPlayer();
+                    mediaPlayer = new MediaPlayer();
 
                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     try {
                         mediaPlayer.setDataSource(urlAudio);
                         mediaPlayer.prepare();
-                        mediaPlayer.start();
+
+                        if (aBoolean) {
+                            aBoolean = false;
+                            mediaPlayer.start();
+                            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mediaPlayer) {
+                                    mediaPlayer.release();
+                                    aBoolean = true;
+                                    Log.d("31janV1", "onComplete ทำงาน");
+                                }
+                            });
+                        }
+
                         Toast.makeText(getApplicationContext(), "Play Audio File", Toast.LENGTH_SHORT).show();
                     } catch (IOException ex) {
                         Log.e(TAG, "Could not open file", ex);
