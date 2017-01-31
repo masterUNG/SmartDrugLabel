@@ -94,6 +94,7 @@ public class ReadTagActivity extends AppCompatActivity {
 
     }   // Main Class
 
+
     public void clickStopReadTag(View view) {
         aBoolean = true;
         mediaPlayer.stop();
