@@ -101,7 +101,6 @@ public class ReadTagActivity extends AppCompatActivity {
     }
 
 
-
     private void NFCIntent(Intent intent) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {

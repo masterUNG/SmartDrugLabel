@@ -115,7 +115,7 @@ public class WriteTagActivity extends ActionBarActivity {
                 //Toast.makeText(this, "Tag writen!", Toast.LENGTH_SHORT).show();
                 final AlertDialog.Builder viewDetail = new AlertDialog.Builder(this);
                 viewDetail.setIcon(android.R.drawable.btn_star_big_on);
-                viewDetail.setTitle("Write complete!");
+                viewDetail.setTitle("Write Tag");
                 viewDetail.setMessage("Write complete!").setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {

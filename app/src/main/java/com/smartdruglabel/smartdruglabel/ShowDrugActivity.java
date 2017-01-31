@@ -87,8 +87,7 @@ public class ShowDrugActivity extends Activity {
         //Searchview
         final SearchView sv = (SearchView) findViewById(R.id.inputSearch);
 
-        String url = "http://202.58.126.48:8081/smartdruglabel/getMedicine.php";
-        /* String url = "http://www.kongtunmae-oncb.go.th/offer_hmf/smartdruglabel/getMedicine.php"; */
+        String url = "http://202.58.126.48:8081/smartdruglabel/getDrugDetail.php";
         Intent intent = getIntent();
         final String Username = intent.getStringExtra("Username");
 
@@ -107,8 +106,13 @@ public class ShowDrugActivity extends Activity {
 
                 map = new HashMap<String, String>();
                 map.put("drugName", c.getString("drugName"));
+                map.put("groupName", c.getString("groupName"));
+                map.put("typeName", c.getString("typeName"));
                 map.put("drugExpired", c.getString("drugExpired"));
                 map.put("drugID", c.getString("drugID"));
+                map.put("drugIndication", c.getString("drugIndication"));
+                map.put("drugDirection", c.getString("drugDirection"));
+                map.put("drugWarning", c.getString("drugWarning"));
                 MyArrList.add(map);
             }
 
@@ -146,11 +150,26 @@ public class ShowDrugActivity extends Activity {
                             .toString();
                     String expiredDate = MyArrList.get(position).get("drugExpired")
                             .toString();
+                    String strMedGroup = MyArrList.get(position).get("groupName")
+                            .toString();
+                    String strMedType = MyArrList.get(position).get("typeName")
+                            .toString();
+                    String strMedIndication = MyArrList.get(position).get("drugIndication")
+                            .toString();
+                    String strMedDirection = MyArrList.get(position).get("drugDirection")
+                            .toString();
+                    String strMedWarning = MyArrList.get(position).get("drugWarning")
+                            .toString();
 
                     viewDetail.setIcon(android.R.drawable.btn_star_big_on);
                     viewDetail.setTitle("Drug Detail");
-                    viewDetail.setMessage("Drug ID : " + strMedId + "\n"
-                            + "Drug Name : " + strMedName + "\n"
+                    viewDetail.setMessage("ID : " + strMedId + "\n"
+                            + "Name : " + strMedName + "\n"
+                            + "Group : " + strMedGroup + "\n"
+                            + "Type : " + strMedType + "\n"
+                            + "Indication : " + strMedIndication + "\n"
+                            + "Direction : " + strMedDirection + "\n"
+                            + "Warning : " + strMedWarning + "\n"
                             + "Expired Date : " + expiredDate + "\n");
                     viewDetail.setPositiveButton("OK",
                             new DialogInterface.OnClickListener() {

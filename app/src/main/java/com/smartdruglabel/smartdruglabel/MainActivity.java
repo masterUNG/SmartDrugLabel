@@ -62,10 +62,10 @@ public class MainActivity extends Activity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String url = "http://202.58.126.48:8081/smartdruglabel/checkLogin.php";
-                /*String url = "http://www.kongtunmae-oncb.go.th/offer_hmf/smartdruglabel/checkLogin.php"; */
+
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("strUser", txtUser.getText().toString()));
-                params.add(new BasicNameValuePair("strPass", txtPass.getText().toString()));
+                params.add(new BasicNameValuePair("strUser", txtUser.getText().toString().trim()));
+                params.add(new BasicNameValuePair("strPass", txtPass.getText().toString().trim()));
 
                 String resultServer = getHttpPost(url, params);
 
@@ -86,11 +86,13 @@ public class MainActivity extends Activity {
                 //Prepare Login
                 if (strStatusID.equals("0")) {
                     //Dialog
-                    ad.setTitle("Error!");
-                    ad.setIcon(android.R.drawable.btn_star_big_on);
-                    ad.setPositiveButton("Close", null);
-                    ad.setMessage(strError);
-                    ad.show();
+                    MyAlert myAlert = new MyAlert(MainActivity.this); //Call MyAlert Class
+                    myAlert.myDialog(android.R.drawable.btn_star_big_on, "Error", strError);
+                    //ad.setTitle("Error");
+                    //ad.setIcon(android.R.drawable.btn_star_big_on);
+                    //ad.setPositiveButton("Close", null);
+                    //ad.setMessage(strError);
+                    //ad.show();
                     txtUser.setText("");
                     txtPass.setText("");
                 } else {
