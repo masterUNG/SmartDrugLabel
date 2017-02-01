@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
                 if (strStatusID.equals("0")) {
                     //Dialog
                     MyAlert myAlert = new MyAlert(MainActivity.this); //Call MyAlert Class
-                    myAlert.myDialog(android.R.drawable.btn_star_big_on, "Error", strError);
+                    myAlert.myDialog(R.drawable.warning_icon, "Error", strError);
                     //ad.setTitle("Error");
                     //ad.setIcon(android.R.drawable.btn_star_big_on);
                     //ad.setPositiveButton("Close", null);
