@@ -1,12 +1,25 @@
 package com.smartdruglabel.smartdruglabel;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,26 +35,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ShowDrugActivity extends Activity {
     @SuppressLint("NewApi")
@@ -113,6 +113,7 @@ public class ShowDrugActivity extends Activity {
                 map.put("drugIndication", c.getString("drugIndication"));
                 map.put("drugDirection", c.getString("drugDirection"));
                 map.put("drugWarning", c.getString("drugWarning"));
+                map.put("drugPicture", c.getString("drugPicture"));
                 MyArrList.add(map);
             }
 
@@ -160,6 +161,16 @@ public class ShowDrugActivity extends Activity {
                             .toString();
                     String strMedWarning = MyArrList.get(position).get("drugWarning")
                             .toString();
+
+                    String strURLimage = MyArrList.get(position).get("drugPicture");
+                    strURLimage = "http://202.58.126.48/picture/" + strURLimage;
+                    Log.d("1febV1", "strURLimage ==> " + strURLimage);
+
+                    LayoutInflater layoutInflater = ShowDrugActivity.this.getLayoutInflater();
+                    View view = layoutInflater.inflate(R.layout.my_drug_layout, null);
+                    ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+                    Picasso.with(ShowDrugActivity.this).load(strURLimage).into(imageView);
+                    viewDetail.setView(view);
 
                     viewDetail.setIcon(android.R.drawable.btn_star_big_on);
                     viewDetail.setTitle("Drug Detail");

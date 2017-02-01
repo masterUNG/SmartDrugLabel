@@ -96,8 +96,14 @@ public class ReadTagActivity extends AppCompatActivity {
 
 
     public void clickStopReadTag(View view) {
-        aBoolean = true;
-        mediaPlayer.stop();
+        try {
+
+            mediaPlayer.stop();
+            aBoolean = true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
